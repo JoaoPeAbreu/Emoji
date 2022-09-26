@@ -1,0 +1,30 @@
+Ideia: Site para criação de emojis
+
+Classes:
+
+Classe Pessoa - 
+    * nome
+    * email
+    * senha
+    * idade
+
+Classe Emoji - 
+    * pessoa
+    * data de criação
+    * nome do emoji
+    * representação(descrição)
+    * foto do emoji
+    * classificação(categoria)
+
+Classe Grafico - 
+  * campo descrição
+  * x
+  * y
+
+exemplos de instancias: emojis por dia, emojis por classificação
+
+Classe4 -
+
+Classe5 - 
+
+Classe6 - 
