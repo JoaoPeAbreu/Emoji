@@ -16,18 +16,6 @@ Classe Emoji -
     * foto do emoji / text
     * classificação(categoria) / text
 
-Classe Grafico - 
-  * campo descrição / text
-  * x / 
-  * y / 
-
-exemplos de instancias: emojis por dia, emojis por classificação
-
 Classe Sugestão -
-  * id / int
   * classificação / text
   * ideia / text
-
-Classe5 - 
-
-Classe6 - 
