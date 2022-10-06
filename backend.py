@@ -34,3 +34,4 @@ def login():
 
     resposta.headers.add("Access-Control-Allow-Origin", "*")
     return resposta
+
