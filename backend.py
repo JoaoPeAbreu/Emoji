@@ -35,3 +35,4 @@ def login():
     resposta.headers.add("Access-Control-Allow-Origin", "*")
     return resposta
 
+app.run(debug=True, host='0.0.0.0', port=5000)

@@ -1,15 +1,24 @@
-from flask import Flask, jsonify, request, send_file, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
+from flask import *
 from datetime import date
 import os
+from flask_session import *
+
 app = Flask(__name__)
+meuservidor = "http://localhost:8080"
 CORS(app)
-caminho = os.path.dirname(os.path.abspath(__file__)) 
-arquivobd = os.path.join(caminho, "tabelas.db")
-app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{arquivobd}'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
-db= SQLAlchemy(app)
+path = os.path.dirname(os.path.abspath(__file__)) 
+arquivobd = os.path.join(path, 'tabelas.db')
+
+app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///" + arquivobd
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False 
+db = SQLAlchemy(app)
+
+app.secret_key = '$#EWFGHJUI*&DEGBHYJU&Y%T#RYJHG%##RU&U'
+app.config["SESSION_PERMANENT"] = False
+app.config["SESSION_TYPE"] = "filesystem"
+Session(app)
 
 class Pessoa(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -71,7 +80,7 @@ class Sugestao(db.Model):
             "ideia": self.ideia
         }
 
-if __name__ == "__main__":
+'''if __name__ == "__main__":
     if os.path.exists(arquivobd):
         os.remove(arquivobd)
 
@@ -111,4 +120,4 @@ if __name__ == "__main__":
     print(".....................................")
     print(s1)
     print(s2)
-    print(".....................................")
+    print(".....................................")'''
