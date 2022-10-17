@@ -35,4 +35,15 @@ def login():
     resposta.headers.add("Access-Control-Allow-Origin", "*")
     return resposta
 
+@app.route("/listar/<string:classe>")
+def listar(classe):
+    dados = None
+    if classe == "Emoji":
+      dados = db.session.query(Emoji).all()
+    lista_jsons = [ x.json() for x in dados ]
+    resposta = jsonify(lista_jsons)
+    resposta.headers.add("Access-Control-Allow-Origin", meuservidor)
+    resposta.headers.add("Access-Control-Allow-Credentials", "true")
+    return resposta
+
 app.run(debug=True, host='0.0.0.0', port=5000)

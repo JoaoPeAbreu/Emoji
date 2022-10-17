@@ -10,16 +10,16 @@
     <body>
         <div id="login">
             <h1>Login</h1>
-            <form class="card-content">
+            <form class="card-content" onsubmit="return false">
                 <div class="card-content-area">
                     <label for="usuario">Email</label>
-                    <input type="text" id="email" autocomplete="on">
+                    <input type="text" id="campoEmail" autocomplete="on">
                 </div>
                 <div class="card-content-area">
                     <label for="senha">Senha</label>
-                    <input type="password" id="senha" autocomplete="off">
+                    <input type="password" id="campoSenha" autocomplete="off">
                 </div>
-                <button type="submit" class="btn btn-primary" id="btlogin">Enviar</button>
+                <button type="submit" class="btn btn-primary" id="btnFazerLogin">Enviar</button>
             </form>
         </div>
 
