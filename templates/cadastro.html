@@ -10,16 +10,20 @@
     <body>
         <div id="cadastro">
             <h1>Cadastro</h1>
-            <form class="card-content">
+            <form class="card-content" onsubmit="return false">
+                <div class="card-content-area">
+                  <label for="usuario">Nome</label>
+                  <input type="text" id="campoNome" autocomplete="on">
+                </div>
                 <div class="card-content-area">
                     <label for="usuario">Email</label>
-                    <input type="text" id="email" autocomplete="on">
+                    <input type="text" id="campoEmail" autocomplete="on">
                 </div>
                 <div class="card-content-area">
                     <label for="senha">Senha</label>
-                    <input type="password" id="senha" autocomplete="off">
+                    <input type="password" id="campoSenha" autocomplete="off">
                 </div>
-                <button type="submit" class="btn btn-primary" id="btlogin">Enviar</button>
+                <button type="submit" id="btIncluirPessoa">Enviar</button>
             </form>
         </div>
 
@@ -29,6 +33,6 @@
 
         <script src="https://code.jquery.com/jquery-3.6.0.js"
         integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-
+        <script src="../static/js/pessoascript.js"></script>
     </body>
 </html>
