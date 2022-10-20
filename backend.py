@@ -46,4 +46,36 @@ def listar(classe):
     resposta.headers.add("Access-Control-Allow-Credentials", "true")
     return resposta
 
+@app.route("/atualizar_emoji/<string:classe>", methods=['put'])
+def atualizar(classe):
+    if request.method == 'GET':
+        return render_template("atualizaremoji.html")
+    resposta = jsonify({"resultado": "ok", "detalhes": "ok"})
+    dados = request.get_json()  
+    try:  
+        if classe == "Emoji":
+            if 'id' not in dados:
+                resposta = jsonify({"resultado": "erro", 
+                            "detalhes": "Atributo id não encontrado"})
+            else:
+                id = dados['id']
+                algo = Emoji.query.get(id)
+                if algo is None:
+                    resposta = jsonify({"resultado": "erro", 
+                                "detalhes": f"Objeto não encontrado, id: {id}"})
+                else:
+                    algo.datacriacao = dados['datacriacao']
+                    algo.nomeemoji = dados['nomeemoji']
+                    algo.representacao = dados['representacao']
+                    algo.fotoemoji = dados['fotoemoji']
+                    algo.classificacao = dados['classificacao']
+                    db.session.commit()
+        else:
+            resposta = jsonify({"resultado": "erro", "detalhes": f"Classe não encontrada: {classe}"})        
+        
+    except Exception as e:
+        resposta = jsonify({"resultado": "erro", "detalhes": str(e)})
+    resposta.headers.add("Access-Control-Allow-Origin", "*")
+    return resposta
+
 app.run(debug=True, host='0.0.0.0', port=5000)
