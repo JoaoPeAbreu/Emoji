@@ -20,6 +20,53 @@ def incluir_pessoa():
         resposta.headers.add("Access-Control-Allow-Origin", "*")
         return resposta 
 
+@app.route('/cadastro_emoji', methods=['GET', 'POST'])
+@jwt_required()
+def incluir_emoji():
+    try:
+        print("quem está acessando: ")
+        current_user = get_jwt_identity()
+        print(current_user)
+        
+        dados = None
+        if request.method == 'GET':
+            return render_template("....html")
+        else:
+            resposta = jsonify({"resultado": "ok", "detalhes": "oi"})     
+            dados = request.get_json(force = True)
+            try:  
+                novo = Emoji(**dados) 
+                db.session.add(novo) 
+                db.session.commit()  
+            except Exception as e:
+                resposta = jsonify({"resultado": "erro", "detalhes": str(e)})
+    except Exception as e:
+        resposta = jsonify({"resultado":"erro","detalhes":str(e)})
+        print("ERRO: "+str(e))
+    resposta.headers.add("Access-Control-Allow-Origin", "*")
+    return resposta 
+
+@app.route("/save_image", methods=['POST'])
+def salvar_imagem():
+    try:
+        print("comecando")
+        file_val = request.files['foto']
+        print("vou salvar em: "+file_val.filename)
+        arquivoimg = os.path.join(caminho, 'imagens/'+file_val.filename)
+        file_val.save(arquivoimg)
+        r = jsonify({"resultado":"ok", "detalhes": file_val.filename})
+    except Exception as e:
+        r = jsonify({"resultado":"erro", "detalhes": str(e)})
+
+    r.headers.add("Access-Control-Allow-Origin", "*")
+    return r
+
+@app.route('/get_image/<int:emoji_id>')
+def get_image(emoji_id):
+    book = db.session.query(Emoji).get(emoji_id)
+    arquivoimg = os.path.join(caminho, 'imagens/'+ book.fotoemoji)
+    return send_file(arquivoimg, mimetype='image/gif')
+
 @app.route('/fazer_login', methods=['GET', 'POST'])
 def login():
     if request.method == 'GET':
@@ -30,7 +77,12 @@ def login():
         senha = str(dados['senha'])
         print(dados)
 
-        resposta = jsonify({"resultado": "ok", "detalhes": "ok"})
+        encontrado = Pessoa.query.filter_by(email=login, senha=senha).first()
+        if encontrado is None: 
+            resposta = jsonify({"resultado": "erro", "detalhes":"usuario ou senha incorreto(s)"})
+        else:
+            access_token = create_access_token(identity=login)
+            resposta =  jsonify({"resultado":"ok", "detalhes":access_token}) 
 
     resposta.headers.add("Access-Control-Allow-Origin", "*")
     return resposta
@@ -76,6 +128,25 @@ def atualizar(classe):
     except Exception as e:
         resposta = jsonify({"resultado": "erro", "detalhes": str(e)})
     resposta.headers.add("Access-Control-Allow-Origin", "*")
+    return resposta
+
+@app.route("/excluir_emoji/<int:emoji_id>", methods=['DELETE'])
+def excluir_emoji(emoji_id):
+    resposta = jsonify({"resultado": "ok", "detalhes": "ok"})
+    try:
+        Emoji.query.filter(Emoji.id == emoji_id).delete()
+        db.session.commit()
+    except Exception as e:
+        resposta = jsonify({"resultado":"erro", "detalhes":str(e)})
+    resposta.headers.add("Access-Control-Allow-Origin", "*")
+    return resposta
+
+@app.route("/logout", methods=['POST'])
+def login():
+    resposta = jsonify({"resultado": "ok", "detalhes": "ok"})
+    dados = request.get_json()  
+    session.pop(dados['fazer_login'], default=None)
+    resposta.headers.add("Access-Control-Allow-Origin", meuservidor)
     return resposta
 
 app.run(debug=True, host='0.0.0.0', port=5000)
