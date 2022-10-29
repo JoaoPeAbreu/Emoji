@@ -58,3 +58,57 @@ $(function() {
         }
     });
 });
+$(function () {
+    $(document).on("click", "#btAtualizarEmoji", function () {
+        id = $("#campoId").val();
+        datacriacao = $("#campoDataCriacao").val();
+        nomeemoji = $("#campoNomeEmoji").val();
+        representacao = $("#campoRepresentacao").val();
+        fotoemoji = $("#campoFotoEmoji").val();
+        classificacao = $("#campoClassificacao").val();
+        var dados = JSON.stringify({ id: id, datacriacao: datacriacao, nomeemoji: nomeemoji, representacao: representacao, fotoemoji: fotoemoji, classificacao: classificacao});
+        $.ajax({
+            url: 'http://localhost:5000/atualizar_emoji/Emoji',
+            type: 'PUT',
+            dataType: 'json',
+            contentType: 'application/json',
+            data: dados,
+            success: emojiAtualizado,
+            error: erroAoAtualizar
+        });
+        function emojiAtualizado(retorno) {
+            if (retorno.resultado == "ok") {
+                alert("Emoji atualizado com sucesso!");
+                sessionStorage.removeItem('emoji_id');
+                window.location = "....html"; //colocar depois o html
+            } else {
+                alert("ERRO na atualização: " + retorno.resultado + ":" + retorno.detalhes);
+            }
+        }
+        function erroAoAtualizar(retorno) {
+            alert("ERRO ao contactar back-end: " + retorno.resultado + ":" + retorno.detalhes);
+        }
+    });
+    //var emoji_id = sessionStorage.getItem('emoji_id');
+    //$.ajax({
+    //    url: 'http://localhost:5000/retornar/Emoji/' + emoji_id,
+    //    method: 'GET',
+    //    dataType: 'json',
+    //    success: exibir_no_form,
+    //    error: function () {
+    //        alert("erro ao ler dados, verifique o backend");
+    //    }
+    //});
+    // função executada quando tudo dá certo
+    //function exibir_no_form(retorno) {
+    //    if (retorno.resultado == "ok") {
+    //        pessoa = retorno.detalhes;
+    //        $("#campoId").val(pessoa.id);
+    //        $("#campoNome").val(pessoa.nome);
+    //        $("#campoEmail").val(pessoa.email);
+    //        $("#campoTelefone").val(pessoa.telefone);
+    //    } else {
+    //        alert("ERRO: " + retorno.detalhes)
+    //    }
+    //}
+});

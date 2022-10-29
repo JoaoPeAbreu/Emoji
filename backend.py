@@ -106,7 +106,7 @@ def listar(classe):
 
     '''curl -X POST -d '{"pessoa" : "p1", "datacriacao" : date(2022, 10, 3), "nomeemoji" : "coelho", "representacao" : "O emoji representa um coelho femea", "classificacao" : "Animais", "fotoemoji" : "sla"}' localhost:5000/listar/Emoji'''
 
-@app.route("/atualizar_emoji/<string:classe>", methods=['put'])
+@app.route("/atualizar_emoji/<string:classe>", methods=['PUT'])
 def atualizar(classe):
     if request.method == 'GET':
         return render_template("....html") #depois colocar o nome do arquivo
