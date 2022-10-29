@@ -8,8 +8,8 @@ from flask_session import *
 app = Flask(__name__)
 meuservidor = "http://localhost:8080"
 CORS(app)
-path = os.path.dirname(os.path.abspath(__file__)) 
-arquivobd = os.path.join(path, 'tabelas.db')
+caminho = os.path.dirname(os.path.abspath(__file__)) 
+arquivobd = os.path.join(caminho, 'tabelas.db')
 
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///" + arquivobd
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False 
@@ -26,8 +26,8 @@ from flask_jwt_extended import jwt_required
 from flask_jwt_extended import JWTManager
 from datetime import timedelta
 
-app.config["JWT_SECRET_KEY"] = "super-secret"  # Change this!
-app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(minutes=10) #hours=1)
+app.config["JWT_SECRET_KEY"] = "super-secret"
+app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(minutes=10)
 jwt = JWTManager(app)
 
 class Pessoa(db.Model):

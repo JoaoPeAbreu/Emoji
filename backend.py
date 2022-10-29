@@ -20,6 +20,8 @@ def incluir_pessoa():
         resposta.headers.add("Access-Control-Allow-Origin", "*")
         return resposta 
 
+        '''curl -d '{"nome" : "Akemi", "email" : "akemi.shibukawa@gmail.com", "senha" : "antilopes1galopantes"}' -X POST -H "Content-Type:application/json" localhost:5000/cadastro'''
+
 @app.route('/cadastro_emoji', methods=['GET', 'POST'])
 @jwt_required()
 def incluir_emoji():
@@ -30,7 +32,7 @@ def incluir_emoji():
         
         dados = None
         if request.method == 'GET':
-            return render_template("....html")
+            return render_template("....html") #depois trocar pelo nome do arquivo
         else:
             resposta = jsonify({"resultado": "ok", "detalhes": "oi"})     
             dados = request.get_json(force = True)
@@ -44,7 +46,9 @@ def incluir_emoji():
         resposta = jsonify({"resultado":"erro","detalhes":str(e)})
         print("ERRO: "+str(e))
     resposta.headers.add("Access-Control-Allow-Origin", "*")
-    return resposta 
+    return resposta
+
+    '''curl -d '{"pessoa" : "p1", "datacriacao" : date(2022, 10, 3), "nomeemoji" : "coelho", "representacao" : "O emoji representa um coelho femea", "classificacao" : "Animais", "fotoemoji" : "sla"}' -X POST -H "Content-Type:application/json" localhost:5000/cadastro_emoji'''
 
 @app.route("/save_image", methods=['POST'])
 def salvar_imagem():
@@ -87,6 +91,8 @@ def login():
     resposta.headers.add("Access-Control-Allow-Origin", "*")
     return resposta
 
+    '''curl -c /tmp/cookie -X POST -d '{"login":"akemi.shibukawa@gmail.com", "senha":"antilopes1galopantes"}' localhost:5000/fazer_login'''
+
 @app.route("/listar/<string:classe>")
 def listar(classe):
     dados = None
@@ -98,10 +104,12 @@ def listar(classe):
     resposta.headers.add("Access-Control-Allow-Credentials", "true")
     return resposta
 
+    '''curl -X POST -d '{"pessoa" : "p1", "datacriacao" : date(2022, 10, 3), "nomeemoji" : "coelho", "representacao" : "O emoji representa um coelho femea", "classificacao" : "Animais", "fotoemoji" : "sla"}' localhost:5000/listar/Emoji'''
+
 @app.route("/atualizar_emoji/<string:classe>", methods=['put'])
 def atualizar(classe):
     if request.method == 'GET':
-        return render_template("atualizaremoji.html")
+        return render_template("....html") #depois colocar o nome do arquivo
     resposta = jsonify({"resultado": "ok", "detalhes": "ok"})
     dados = request.get_json()  
     try:  
@@ -130,6 +138,8 @@ def atualizar(classe):
     resposta.headers.add("Access-Control-Allow-Origin", "*")
     return resposta
 
+    '''curl -X PUT -d '{"pessoa" : "p1", "datacriacao" : date(2022, 10, 3), "nomeemoji" : "vaca", "representacao" : "O emoji representa um coelho femea", "classificacao" : "Animais", "fotoemoji" : "sla"}' -H "Content-Type:application/json" localhost:5000/atualizar/Emoji '''
+
 @app.route("/excluir_emoji/<int:emoji_id>", methods=['DELETE'])
 def excluir_emoji(emoji_id):
     resposta = jsonify({"resultado": "ok", "detalhes": "ok"})
@@ -141,12 +151,16 @@ def excluir_emoji(emoji_id):
     resposta.headers.add("Access-Control-Allow-Origin", "*")
     return resposta
 
+    '''curl -X DELETE http://localhost:5000/excluir_emoji/1'''
+
 @app.route("/logout", methods=['POST'])
-def login():
+def logout():
     resposta = jsonify({"resultado": "ok", "detalhes": "ok"})
     dados = request.get_json()  
     session.pop(dados['fazer_login'], default=None)
     resposta.headers.add("Access-Control-Allow-Origin", meuservidor)
     return resposta
+
+    '''curl -X POST -d '{"login":"akemi.shibukawa@gmail.com"}' -H "Content-Type:application/json" localhost:5000/logout'''
 
 app.run(debug=True, host='0.0.0.0', port=5000)
