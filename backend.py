@@ -48,7 +48,8 @@ def incluir_emoji():
     resposta.headers.add("Access-Control-Allow-Origin", "*")
     return resposta
 
-    '''curl -d '{"pessoa" : "p1", "datacriacao" : date(2022, 10, 3), "nomeemoji" : "coelho", "representacao" : "O emoji representa um coelho femea", "classificacao" : "Animais", "fotoemoji" : "sla"}' -X POST -H "Content-Type:application/json" localhost:5000/cadastro_emoji'''
+    '''curl -d '{"pessoa" : "p1", "datacriacao" : date(2022, 10, 3), "nomeemoji" : "coelho", "representacao" : "O emoji representa um coelho femea", "classificacao" : "Animais", "fotoemoji" : "sla"}' -X POST -H "Content-Type:application/json" localhost:5000/cadastro_emoji -H 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY1ODMxNTEzOSwianRpIjoiZTVmMGVjMGEtOGZjMC00N2QyLWE4YjItOTMzNTY4MjMwZTM5IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6Impvc2lsdmFAZ21haWwuY29tIiwibmJmIjoxNjU4MzE1MTM5LCJleHAiOjE2NTgzMTYwMzl9.DjTA7h8idYfFpXixYl7gCGtu9rmahlj2IXTtlbkE0nc'''
+    '''curl -X POST localhost:5000/cadastro_emoji -d '{"pessoa" : "p1", "datacriacao" : date(2022, 10, 3), "nomeemoji" : "coelho", "representacao" : "O emoji representa um coelho femea", "classificacao" : "Animais", "fotoemoji" : "sla"}' -H 'Content-Type: application/json'''
 
 @app.route("/save_image", methods=['POST'])
 def salvar_imagem():
@@ -77,7 +78,7 @@ def login():
         return render_template("login.html")
     else:
         dados = request.get_json(force=True)
-        email = str(dados['email'])
+        email = str(dados['login'])
         senha = str(dados['senha'])
         print(dados)
 
@@ -91,7 +92,8 @@ def login():
     resposta.headers.add("Access-Control-Allow-Origin", "*")
     return resposta
 
-    '''curl -c /tmp/cookie -X POST -d '{"login":"akemi.shibukawa@gmail.com", "senha":"antilopes1galopantes"}' localhost:5000/fazer_login'''
+    '''curl -d '{"email":"akemi.shibukawa@gmail.com", "senha":"antilopes1galopantes"}' localhost:5000/fazer_login'''
+    '''curl -X POST localhost:5000/fazer_login -d '{"login":"akemi.shibukawa@gmail.com","senha":"antilopes1galopantes"}' -H 'Content-Type: application/json'''
 
 @app.route("/listar/<string:classe>")
 def listar(classe):

@@ -31,10 +31,10 @@ $(function() {
 });
 $(function() {
     $(document).on("click", "#btnFazerLogin", function() {
-        email = $("#campoEmail").val();
+        login = $("#campoLogin").val();
         senha = $("#campoSenha").val();
 
-        var dados = JSON.stringify({ email: email, senha: senha });
+        var dados = JSON.stringify({ login: login, senha: senha });
         $.ajax({
             url: 'http://localhost:5000/fazer_login',
             type: 'POST',
