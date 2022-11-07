@@ -1,43 +1,17 @@
-header {
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 28px 15px 24px;
-
+#modal-body {
+    position:relative;
+    left:37%;
+    top:29%;
+    width:320px;
+    height:270px;
 }
 
-
-.buttons {
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
+#modal-body #card-content {
+    position:absolute;
+    display:block;
 }
 
-      
-.login{
-    color: #000;
-    background: #a9d1db; 
-    display: flex;
-    margin-left: 24px;
-    font-size: 16px;
-    font-weight: 700;
-    padding: 11px 12px 11px 12px;
-    border-radius: 24px;
-    border: none;
-
-}    
-
-.signup {
-    margin-left: 16px;
-    background: #a9d1db;
-    display: flex;
-    margin-left: 24px;
-    font-size: 16px;
-    font-weight: 700;
-    padding: 11px 12px 11px 12px;
-    border-radius: 24px;
-    border: none;
+fieldset{
+    width:300px;
+    height:250px;
 }
-

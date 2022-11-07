@@ -4,18 +4,48 @@
         <meta charset="UTF-8">
         <title>Emoji</title>
         <link rel="stylesheet" href="../static/css/style.css"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
     </head>
     <body>
         <header>
             <h2>Emoji</h2>
-
-
-            <div class="buttons">
-			    <a href="fazer_login" target="_blank" style="text-decoration:none"><button class="login">Entrar</button></a>
-        	    <a href="cadastro" target="_blank" style="text-decoration:none"><button class="signup">Criar conta</button></a>
-            </div>
-
         </header>
+        <button class="btn btn-primary" data-toggle="modal" data-target="#modal-login">
+            Entrar
+        </button>
+
+        <div class="modal fade" id="modal-login">
+            <div class="modal-dialog">
+                 <div class="modal-content">
+                     <div class="modal-header">
+                         <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
+                         <h4 class="modal-title">Login</h4>
+                     </div>
+                     <div class="modal-body">
+                        <form class="card-content" onsubmit="return false">
+                            <fieldset>
+                                <label>Email:</label><input class="campoEmail" id="campoEmail" type="text"><br>
+                                <label>Senha:</label><input class="campoSenha" id="campoSenha"type="password"><br>
+                                <input class="btn btn-primary" id="btnFazerLogin" type="submit" value="Enviar">
+                              </fieldset>
+                        </form>
+                     </div>
+                     <div class="modal-footer">
+                         <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                     </div>
+                 </div>
+             </div>
+         </div>
+
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script>
+            $(function(){
+                ("#btn-mensagem").click(function(){
+                    $("#modal-mensagem").modal();
+            });
+        </script>
+        <script src="../static/js/pessoascript.js"></script>
     </body>
 </html>
