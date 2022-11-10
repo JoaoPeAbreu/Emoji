@@ -11,8 +11,12 @@
         <header>
             <h2>Emoji</h2>
         </header>
-        <button class="btn btn-primary" data-toggle="modal" data-target="#modal-login">
+        <a href="fazer_login"><button class="btn btn-primary" data-toggle="modal" data-target="#modal-login"></a>
             Entrar
+        </button>
+
+        <a href="cadastro"><button class="btn btn-primary" data-toggle="modal" data-target="#modal-cadastro"></a>
+            Criar conta
         </button>
 
         <div class="modal fade" id="modal-login">
@@ -25,9 +29,9 @@
                      <div class="modal-body">
                         <form class="card-content" onsubmit="return false">
                             <fieldset>
-                                <label>Email:</label><input class="campoEmail" id="campoEmail" type="text"><br>
-                                <label>Senha:</label><input class="campoSenha" id="campoSenha"type="password"><br>
-                                <input class="btn btn-primary" id="btnFazerLogin" type="submit" value="Enviar">
+                                <label for="usuario">Email:</label><input type="text" id="campoEmail"><br>
+                                <label for="senha">Senha:</label><input type="password" id="campoSenha"><br>
+                                <button type="submit" class="btn btn-primary" id="btnFazerLogin">Enviar</button>
                               </fieldset>
                         </form>
                      </div>
@@ -38,14 +42,39 @@
              </div>
          </div>
 
+         <div class="modal fade" id="modal-cadastro">
+            <div class="modal-dialog">
+                 <div class="modal-content">
+                     <div class="modal-header">
+                         <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
+                         <h4 class="modal-title">Cadastro</h4>
+                     </div>
+                     <div class="modal-body">
+                        <form class="card-content" onsubmit="return false">
+                            <fieldset>
+                                <label for="usuario">Nome:</label><input type="text" id="campoNome">
+                                <label for="usuario">Email:</label><input type="text" id="campoEmail">
+                                <label for="senha">Senha:</label><input type="password" id="campoSenha">
+                                <button type="submit" class="btn btn-primary"  id="btIncluirPessoa">Enviar</button>
+                            </fieldset>
+                        </form>
+                     </div>
+                     <div class="modal-footer">
+                         <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                     </div>
+                 </div>
+             </div>
+         </div>
+
+        <script src="../static/js/pessoascript.js"></script>
         <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script>
             $(function(){
-                ("#btn-mensagem").click(function(){
-                    $("#modal-mensagem").modal();
+                $("#btn-mensagem").click(function(){
+                $("#modal-mensagem").modal();
+                });
             });
         </script>
-        <script src="../static/js/pessoascript.js"></script>
     </body>
 </html>
