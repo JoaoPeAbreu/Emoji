@@ -7,7 +7,7 @@ def home():
 @app.route('/cadastro', methods=['GET', 'POST'])
 def incluir_pessoa():
     if request.method == 'GET':
-        return render_template("cadastro.html")
+        return render_template("index.html")
     else:
         resposta = jsonify({"resultado": "ok", "detalhes": "oi"})     
         dados = request.get_json(force = True)
