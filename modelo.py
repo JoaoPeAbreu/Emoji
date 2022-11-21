@@ -52,27 +52,27 @@ class Emoji(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     pessoa_id = db.Column(db.Integer, db.ForeignKey(Pessoa.id), nullable=False)
     pessoa = db.relationship("Pessoa")
-    datacriacao = db.Column(db.Date)
-    nomeemoji = db.Column(db.String(254))
-    representacao = db.Column(db.String(254))
-    fotoemoji = db.Column(db.Text)
-    classificacao = db.Column(db.String(254))
+    dcria = db.Column(db.Date) #data criação
+    nemo = db.Column(db.String(254)) #nome emoji
+    repre = db.Column(db.String(254)) #representação
+    femo = db.Column(db.Text) #foto emoji
+    classi = db.Column(db.String(254)) #classificação
 
     def __str__(self):
         return str(self.pessoa) + "[id=" + str(self.id)+ "], " +\
-            str(self.datacriacao) + ", " + self.nomeemoji + ", " + self.representacao +\
-                self.fotoemoji + ", " + self.classificacao
+            str(self.dcria) + ", " + self.nemo + ", " + self.repre +\
+                self.femo + ", " + self.classi
     
     def json(self):
         return {
             "id": self.id,
             "pessoa_id": self.pessoa_id,
             "pessoa": self.pessoa.json(),
-            "datacriacao": self.datacriacao,
-            "nomeemoji": self.nomeemoji,
-            "representacao": self.representacao,
-            "fotoemoji": self.fotoemoji,
-            "classificacao": self.classificacao
+            "dcria": self.dcria,
+            "nemo": self.nemo,
+            "repre": self.repre,
+            "femo": self.femo,
+            "classi": self.classi
         }
 
 class Sugestao(db.Model):
@@ -108,8 +108,8 @@ class Sugestao(db.Model):
     print(p2)
     print(".....................................")
 
-    e1 = Emoji(pessoa = p1, datacriacao = date(2022, 10, 3), nomeemoji = "coelho", representacao = "O emoji representa um coelho femea", classificacao = "Animais", fotoemoji= 'sla')
-    e2 = Emoji(pessoa = p2, datacriacao = date(2022, 10, 2), nomeemoji = "pinheiro", representacao = "O emoji representa o pinheiro que fica na minha casa", classificacao = "Planta", fotoemoji= 'sla2')
+    e1 = Emoji(pessoa = p1, dcria = date(2022, 10, 3), nemo = "coelho", repre = "O emoji representa um coelho femea", classi = "Animais", femo= 'sla')
+    e2 = Emoji(pessoa = p2, dcria = date(2022, 10, 2), nemo = "pinheiro", repre = "O emoji representa o pinheiro que fica na minha casa", classi = "Planta", femo= 'sla2')
 
     db.session.add(e1)
     db.session.add(e2)

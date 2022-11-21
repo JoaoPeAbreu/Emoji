@@ -13,8 +13,8 @@ def run():
     print(p2)
     print(".....................................")
 
-    e1 = Emoji(pessoa = p1, datacriacao = date(2022, 10, 3), nomeemoji = "coelho", representacao = "O emoji representa um coelho femea", classificacao = "Animais", fotoemoji= 'sla')
-    e2 = Emoji(pessoa = p2, datacriacao = date(2022, 10, 2), nomeemoji = "pinheiro", representacao = "O emoji representa o pinheiro que fica na minha casa", classificacao = "Planta", fotoemoji= 'sla2')
+    e1 = Emoji(pessoa = p1, dcria = date(2022, 10, 3), nemo = "coelho", repre = "O emoji representa um coelho femea", classi = "Animais", femo= 'sla')
+    e2 = Emoji(pessoa = p2, dcria = date(2022, 10, 2), nemo = "pinheiro", repre = "O emoji representa o pinheiro que fica na minha casa", classi = "Planta", femo= 'sla2')
 
     db.session.add(e1)
     db.session.add(e2)

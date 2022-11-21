@@ -35,8 +35,8 @@ def incluir_emoji():
             resposta = jsonify({"resultado": "ok", "detalhes": "oi"})     
             dados = request.get_json(force = True)
 
-            partes = dados['datacriacao'].split("-")
-            dados['datacriacao'] = date(int(partes[0]), int(partes[1]), int(partes[2]))
+            partes = dados['dcria'].split("-")
+            dados['dcria'] = date(int(partes[0]), int(partes[1]), int(partes[2]))
 
             try:  
                 novo = Emoji(**dados) 
@@ -54,7 +54,7 @@ def incluir_emoji():
     resposta.headers.add("Access-Control-Allow-Origin", "*")
     return resposta
 
-    #curl -d '{"pessoa_id" : 1, "datacriacao" : "2022-10-3", "nomeemoji" : "coelho", "representacao" : "O emoji representa um coelho femea", "classificacao" : "Animais", "fotoemoji" : "sla"}' -X POST -H "Content-Type:application/json" localhost:5000/cadastro_emoji -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY2ODA4OTU5OCwianRpIjoiODA5ZmZiOGYtZjU2ZC00ZGJkLTg1MzUtZjhhY2FhOWY4NzVlIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImFrZW1pLnNoaWJ1a2F3YUBnbWFpbC5jb20iLCJuYmYiOjE2NjgwODk1OTgsImV4cCI6MTY2ODA5MDE5OH0.zu30CceH126BSCZ3olVXtzgsBTttQ84u4uxZXw1RsKc'
+    #curl -d '{"pessoa_id" : 1, "dcria" : "2022-10-3", "nemo" : "coelho", "repre" : "O emoji representa um coelho femea", "classi" : "Animais", "femo" : "sla"}' -X POST -H "Content-Type:application/json" localhost:5000/cadastro_emoji -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY2ODA4OTU5OCwianRpIjoiODA5ZmZiOGYtZjU2ZC00ZGJkLTg1MzUtZjhhY2FhOWY4NzVlIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImFrZW1pLnNoaWJ1a2F3YUBnbWFpbC5jb20iLCJuYmYiOjE2NjgwODk1OTgsImV4cCI6MTY2ODA5MDE5OH0.zu30CceH126BSCZ3olVXtzgsBTttQ84u4uxZXw1RsKc'
 
 @app.route("/save_image", methods=['POST'])
 def salvar_imagem():
@@ -74,7 +74,7 @@ def salvar_imagem():
 @app.route('/get_image/<int:emoji_id>')
 def get_image(emoji_id):
     book = db.session.query(Emoji).get(emoji_id)
-    arquivoimg = os.path.join(caminho, 'imagens/'+ book.fotoemoji)
+    arquivoimg = os.path.join(caminho, 'imagens/'+ book.femo)
     return send_file(arquivoimg, mimetype='image/gif')
 
 @app.route('/fazer_login', methods=['GET', 'POST'])
@@ -128,11 +128,11 @@ def atualizar(classe):
                     resposta = jsonify({"resultado": "erro", 
                                 "detalhes": f"Objeto não encontrado, id: {id}"})
                 else:
-                    algo.datacriacao = dados['datacriacao']
-                    algo.nomeemoji = dados['nomeemoji']
-                    algo.representacao = dados['representacao']
-                    algo.fotoemoji = dados['fotoemoji']
-                    algo.classificacao = dados['classificacao']
+                    algo.dcria = dados['dcria']
+                    algo.nemo = dados['nemo']
+                    algo.repre = dados['repre']
+                    algo.femo = dados['femo']
+                    algo.classi = dados['classi']
                     db.session.commit()
         else:
             resposta = jsonify({"resultado": "erro", "detalhes": f"Classe não encontrada: {classe}"})        
