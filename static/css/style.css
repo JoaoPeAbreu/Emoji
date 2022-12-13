@@ -10,3 +10,9 @@
     position:absolute;
     display:block;
 }
+
+.card-columns {
+    margin-left: 110px;
+    margin-right: 110px;
+    margin-top: 50px;
+}
